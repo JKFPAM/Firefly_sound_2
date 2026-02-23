@@ -112,7 +112,7 @@ body.phase-sampler {
 
 .inventory-panel {
   background: var(--lime);
-  border-radius: 42px;
+  border-radius: 28px;
   padding: 12px;
   transform: translateX(-125%);
   transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -137,18 +137,17 @@ body.phase-sampler {
   
   overflow-y: auto;
   overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   padding: 0px;
   align-content: start;
  
 }
 
 .inventory-grid::-webkit-scrollbar {
-  width: 8px;
-}
-
-.inventory-grid::-webkit-scrollbar-thumb {
-  background: rgba(29, 40, 95, 0.32);
-  border-radius: 999px;
+  width: 0;
+  height: 0;
+  display: none;
 }
 
 .inventory-card {
@@ -164,7 +163,7 @@ body.phase-sampler {
   aspect-ratio: 1;
   overflow: hidden;
   animation: none;
-  border-radius: 14px;
+  border-radius: 30px;
 }
 
 .inventory-card.is-core {
