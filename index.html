@@ -29,7 +29,17 @@
         <section class="stage-panel">
           <div class="stage-grid" id="stageGrid" role="grid" aria-label="Sampler placement grid"></div>
 
-          <section class="community-panel" aria-label="Community mixes">
+          <button
+            type="button"
+            id="communityToggleBtn"
+            class="community-toggle-btn"
+            aria-controls="communityPanel"
+            aria-expanded="true"
+          >
+            Close Community
+          </button>
+
+          <section class="community-panel" id="communityPanel" aria-label="Community mixes">
             <h2 class="community-title">Community</h2>
 
             <form class="community-save" id="communitySaveForm">

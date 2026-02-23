@@ -346,6 +346,8 @@ const globalScaleInput = document.querySelector("#globalScale");
 const globalScaleValue = document.querySelector("#globalScaleValue");
 const bpmInput = document.querySelector("#bpmControl");
 const bpmValue = document.querySelector("#bpmValue");
+const communityPanel = document.querySelector("#communityPanel");
+const communityToggleButton = document.querySelector("#communityToggleBtn");
 const communitySaveForm = document.querySelector("#communitySaveForm");
 const communityMixNameInput = document.querySelector("#communityMixName");
 const communityAuthorNameInput = document.querySelector("#communityAuthorName");
@@ -382,7 +384,8 @@ const state = {
   activeRow: null,
   playingIconTimers: new Map(),
   communityMixes: [],
-  communitySearchQuery: ""
+  communitySearchQuery: "",
+  communityOpen: true
 };
 
 function clamp(value, min, max) {
@@ -408,6 +411,17 @@ function clearIntroTimers() {
 function clearPlaybackTimers() {
   state.playbackTimers.forEach((timer) => window.clearTimeout(timer));
   state.playbackTimers = [];
+}
+
+function setCommunityOpen(isOpen) {
+  state.communityOpen = Boolean(isOpen);
+  if (communityPanel) {
+    communityPanel.classList.toggle("is-closed", !state.communityOpen);
+  }
+  if (communityToggleButton) {
+    communityToggleButton.setAttribute("aria-expanded", String(state.communityOpen));
+    communityToggleButton.textContent = state.communityOpen ? "Close Community" : "Open Community";
+  }
 }
 
 function createMixId() {
@@ -1151,6 +1165,12 @@ if (randomPlaceButton) {
   randomPlaceButton.addEventListener("click", placeRandomSound);
 }
 
+if (communityToggleButton) {
+  communityToggleButton.addEventListener("click", () => {
+    setCommunityOpen(!state.communityOpen);
+  });
+}
+
 if (communitySaveForm) {
   communitySaveForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -1210,6 +1230,7 @@ if (bpmInput) {
 
 state.communityMixes = loadCommunityMixes();
 renderCommunityList();
+setCommunityOpen(true);
 setBpmDisplay();
 renderInventory();
 renderStage();
